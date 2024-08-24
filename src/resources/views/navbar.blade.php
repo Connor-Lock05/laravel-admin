@@ -3,7 +3,7 @@
 <nav class="flex flex-col justify-start items-center w-fit h-full p-4 shadow">
     <span class="font-semibold underline">Models</span>
 
-    <div class="flex flex-col justify-start items-center gap-2 h-fit">
+    <div class="flex flex-col justify-start items-center gap-y-2 h-fit text-center">
         @foreach ((new ModelService())->getModels() as $class)
             <a
                 href="{{ route('admin.model.index', [base64_encode($class)]) }}"

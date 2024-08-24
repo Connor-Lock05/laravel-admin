@@ -9,6 +9,8 @@
 - [Introduction](#introduction)
 - [Installation](#installation)
 - [Usage](#usage)
+  - [Accessing the Admin Panel](#accessing-the-admin-panel)
+  - [Setting Up Models](#setting-up-models)
 - [Customisation](#customisation)
   - [Configuration](#configuration)
   - [Overriding Views](#overriding-views)
@@ -25,12 +27,33 @@ You can install the package via Composer:
 ```bash
 composer require connor-lock05/laravel-admin
 ```
+
+Upon installation, you need to run
+```bash
+php artisan admin:install
+```
+
+This will automate the installation process for spatie/laravel-permission
+
 ## Usage
+
+### Accessing the admin panel
+
+To access the admin panel, the authenticating model (App\Models\User by default) needs to have the HasRoles trait from the spatie/laravel-permission package
+
+You will then need to create a role for the admin panel access and add this to your config file.
+> See how to customise the admin config [here](#configuration)
+
+By default, the 'Admin' role is allowed access to the admin panel.
+
+Once logged in, visit /admin to get to the admin panel dashboard
+
+### Setting Up Models
 
 To allow a model to be interacted with by the Admin panel, you need to use the `ConnorLock05\LaravelAdmin\Traits\ModifiedByAdminPanel` trait on a model
 This will then require you to define two functions: `getModifiableFields` and `getFieldsForIndexView`
 
-### getModifiableFields
+#### getModifiableFields
 
 The `getModifiableFields` function defines what fields are editable by the admin panel and the data type of the field.
 This function returns an associative array with strings (column names) as keys, and `ConnorLock05\LaravelAdmin\Interfaces\Type` as values.
@@ -56,7 +79,7 @@ public static function getModifiableFields(): array
 }
 ```
 
-### getFieldsForIndexView
+#### getFieldsForIndexView
 
 The `getFieldsForIndexView` function defines what fields are shown in the list on the index view.
 This function returns a non-associative array of strings of column names to include

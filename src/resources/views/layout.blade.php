@@ -22,7 +22,9 @@
 <body class="h-screen">
 <header class="w-full h-12 p-2 shadow">
     <div class="flex justify-between items-center w-full h-full">
-        <h2 class="font-semibold">{{ config('app.name') }} - Admin Panel</h2>
+        <a href="{{ route('admin.dashboard') }}">
+            <h2 class="font-semibold">{{ config('app.name') }} - Admin Panel</h2>
+        </a>
     </div>
 </header>
 <div class="flex w-full h-headerless">

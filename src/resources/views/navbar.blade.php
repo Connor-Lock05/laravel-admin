@@ -1,18 +1,16 @@
-@use(ConnorLock05\LaravelAdmin\Traits\ModifiedByAdminPanel)
-@use(Illuminate\Database\Eloquent\Model)
 @use(Illuminate\Support\Str)
-@php use function ConnorLock05\LaravelAdmin\classes_using_trait; @endphp
+@use(ConnorLock05\LaravelAdmin\Services\ModelService)
 <nav class="flex flex-col justify-start items-center w-fit h-full p-4 shadow">
     <span class="font-semibold underline">Models</span>
 
-    @foreach (classes_using_trait(ModifiedByAdminPanel::class) as $class)
-        @if (($instance = (new $class)) instanceof Model)
+    <div class="flex flex-col justify-start items-center gap-2 w-full h-fit">
+        @foreach ((new ModelService())->getModels() as $class)
             <a
                 href="{{ route('admin.model.index', [base64_encode($class)]) }}"
             >
-                {{ Str::headline((new ReflectionClass($class))->getShortName()) }}
+                {{ \ConnorLock05\LaravelAdmin\get_formatted_class_name($class) }}
             </a>
-        @endif
-    @endforeach
+        @endforeach
+    </div>
 
 </nav>

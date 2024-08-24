@@ -6,6 +6,7 @@ use ConnorLock05\LaravelAdmin\Traits\ModifiedByAdminPanel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
 use ReflectionClass;
+use function ConnorLock05\LaravelAdmin\classes_using_trait;
 
 class ModelService
 {
@@ -43,5 +44,22 @@ class ModelService
         return array_filter($input, function ($value) {
             return !is_null($value);
         });
+    }
+
+    public function getModels(): array
+    {
+        $usingTrait = classes_using_trait(ModifiedByAdminPanel::class);
+
+        $modelsUsingTrait = [];
+
+        foreach ($usingTrait as $class)
+        {
+            if ((new $class) instanceof Model)
+            {
+                $modelsUsingTrait[] = $class;
+            }
+        }
+
+        return $modelsUsingTrait;
     }
 }

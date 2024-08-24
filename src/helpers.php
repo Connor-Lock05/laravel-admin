@@ -2,6 +2,7 @@
 
 namespace ConnorLock05\LaravelAdmin;
 
+use Illuminate\Support\Str;
 use ReflectionClass;
 use ReflectionException;
 
@@ -47,4 +48,9 @@ function load_classes_from_namespace_prefix(string $namespacePrefix): void {
             }
         }
     }
+}
+
+function get_formatted_class_name(string $class): string
+{
+    return Str::headline((new ReflectionClass($class))->getShortName());
 }

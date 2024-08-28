@@ -1,5 +1,8 @@
 <?php
 
+use ConnorLock05\LaravelAdmin\Middleware\RoleAuthorisation;
+use ConnorLock05\LaravelAdmin\Middleware\IpAuthorisation;
+
 return [
 
     /*
@@ -34,7 +37,7 @@ return [
     | An array of middleware to apply to the admin routes
     |
      */
-    'middleware' => ['web', 'auth'],
+    'middleware' => [IpAuthorisation::class],
 
     /*
     |---------------------------
@@ -45,5 +48,16 @@ return [
     |
      */
     'per_page' => 15,
+
+    /*
+    |---------------------------
+    | Allowed Ips
+    |---------------------------
+    |
+    | A list of allowed Ips to access the admin panel
+    | Used when using IpAuthorisation Middleware
+    |
+     */
+    'allowed_ips' => explode(',', env('ADMIN_ALLOWED_IPS', '127.0.0.1')),
 
 ];

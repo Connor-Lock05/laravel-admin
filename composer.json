@@ -2,9 +2,11 @@
     "name": "connor-lock05/laravel-admin",
     "description": "Adds an admin panel to a Laravel Application allowing for a UI to modify model data",
     "require": {
-        "spatie/laravel-permission": "^6.9",
         "php": "8.2.*",
         "laravel/framework": "^11.0"
+    },
+    "suggest": {
+        "spatie/laravel-permission": "Allows for use with Users and Roles"
     },
     "license": "MIT",
     "autoload": {

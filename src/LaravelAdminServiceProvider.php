@@ -9,8 +9,6 @@ class LaravelAdminServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        load_classes_from_namespace_prefix("App\\Models");
-
         $this->loadRoutesFrom(__DIR__.'/routes/web.php');
 
         $this->loadViewsFrom(__DIR__.'/resources/views', 'admin');
@@ -26,9 +24,5 @@ class LaravelAdminServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(__DIR__.'/config/laravel-admin.php', 'laravel-admin');
-
-        $this->commands([
-            InstallCommand::class,
-        ]);
     }
 }

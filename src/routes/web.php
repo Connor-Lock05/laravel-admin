@@ -2,13 +2,14 @@
 
 use ConnorLock05\LaravelAdmin\Controllers\AdminPanelController;
 use ConnorLock05\LaravelAdmin\Controllers\ModelController;
-use ConnorLock05\LaravelAdmin\Middleware\AdminPanelAccess;
+use ConnorLock05\LaravelAdmin\Middleware\LoadModels;
+use ConnorLock05\LaravelAdmin\Middleware\RoleAuthorisation;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(
     array_merge(
+        ['web', LoadModels::class],
         config('laravel-admin.middleware', []),
-        [AdminPanelAccess::class]
     )
 )->group(function () {
     Route::prefix(config('laravel-admin.route_prefix', 'admin'))->group(function () {

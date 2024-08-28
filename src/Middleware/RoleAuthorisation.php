@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Spatie\Permission\Traits\HasRoles;
 
-class AdminPanelAccess
+class RoleAuthorisation
 {
     public function handle(Request $request, Closure $next)
     {

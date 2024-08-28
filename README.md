@@ -27,24 +27,28 @@ You can install the package via Composer:
 ```bash
 composer require connor-lock05/laravel-admin
 ```
-
-Upon installation, you need to run
-```bash
-php artisan admin:install
-```
-
-This will automate the installation process for spatie/laravel-permission
-
 ## Usage
 
 ### Accessing the admin panel
 
-To access the admin panel, the authenticating model (App\Models\User by default) needs to have the HasRoles trait from the spatie/laravel-permission package
+To access the admin panel there are two available methods of authorisation.
 
-You will then need to create a role for the admin panel access and add this to your config file.
-> See how to customise the admin config [here](#configuration)
+1. You can use the `ConnorLock05\LaravelAdmin\Middleware\RoleAuthorisation` middleware. 
+    This will use the logged-in user to check they have the correct roles
+    > Requires the spatie/laravel-permission package to be installed
+2. Or you can use the `ConnorLock05\LaravelAdmin\Middleware\IpAuthorisation` middleware.
+    This will use the ip origin for the request compared to a comma separated list of ip addresses defined in your .env file
+    Define `ADMIN_ALLOWED_IPS` in your .env to a list of allowed IPs.
+    i.e (`ADMIN_ALLOWED_IPS=127.0.0.1,127.0.0.2`)
 
-By default, the 'Admin' role is allowed access to the admin panel.
+#### When using RoleAuthorisation
+
+1. Run through the installation process for spatie/laravel-permission [here](https://spatie.be/docs/laravel-permission/v6/installation-laravel)
+2. You will need to add authentication middleware *before* the RoleAuthorisation middleware to ensure a user is logged in. Do this in the `laravel-admin.php` config file (See [Configuration](#configuration))
+3. You will need to create a role for the admin panel access and add this to your config file.
+  > See how to customise the admin config [here](#configuration)
+  > 
+  > By default, the 'Admin' role is allowed access to the admin panel.
 
 Once logged in, visit /admin to get to the admin panel dashboard
 

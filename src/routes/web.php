@@ -1,6 +1,7 @@
 <?php
 
 use ConnorLock05\LaravelAdmin\Controllers\AdminPanelController;
+use ConnorLock05\LaravelAdmin\Controllers\ArtisanController;
 use ConnorLock05\LaravelAdmin\Controllers\ModelController;
 use ConnorLock05\LaravelAdmin\Middleware\LoadModels;
 use ConnorLock05\LaravelAdmin\Middleware\RoleAuthorisation;
@@ -16,7 +17,7 @@ Route::middleware(
 
         Route::get('/', [AdminPanelController::class, 'index'])->name('admin.dashboard');
 
-        Route::prefix('{model}')->group(function () {
+        Route::prefix('model/{model}')->group(function () {
             Route::get('/', [ModelController::class, 'index'])->name('admin.model.index');
 
             Route::get('/{id}', [ModelController::class, 'show'])->whereNumber('id')
@@ -32,6 +33,11 @@ Route::middleware(
 
             Route::delete('/{id}', [ModelController::class, 'destroy'])->whereNumber('id')
                 ->name('admin.model.destroy');
+        });
+
+        Route::prefix('artisan')->group(function () {
+            Route::get('/', [ArtisanController::class, 'show'])->name('admin.artisan.show');
+            Route::post('/', [ArtisanController::class, 'send'])->name('admin.artisan.send');
         });
     });
 });

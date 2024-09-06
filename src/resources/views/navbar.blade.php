@@ -13,4 +13,10 @@
         @endforeach
     </div>
 
+    <span class="font-semibold underline mt-4">Utilities</span>
+
+    <div class="flex flex-col justify-start items-center gap-y-2 h-fit text-center">
+        <a href="{{ route('admin.artisan.show') }}">Artisan</a>
+    </div>
+
 </nav>

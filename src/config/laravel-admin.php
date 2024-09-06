@@ -60,4 +60,14 @@ return [
      */
     'allowed_ips' => explode(',', env('ADMIN_ALLOWED_IPS', '127.0.0.1')),
 
+    /*
+    |---------------------------
+    | PHP Executable
+    |---------------------------
+    |
+    | Full path to, or name of, PHP Executable
+    |
+     */
+    'php_executable' => 'php'
+
 ];

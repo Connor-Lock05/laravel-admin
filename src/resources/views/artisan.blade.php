@@ -16,7 +16,7 @@
         </button>
     </div>
     <textarea
-        rows="10"
+        rows="20"
         id="artisan-output"
         readonly
         class="w-full border border-black p-2"

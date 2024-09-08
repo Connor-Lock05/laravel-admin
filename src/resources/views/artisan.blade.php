@@ -19,7 +19,7 @@
         rows="20"
         id="artisan-output"
         readonly
-        class="w-full border border-black p-2"
+        class="w-full border border-black p-2 font-mono"
         placeholder="Output"
     ></textarea>
 

@@ -27,8 +27,11 @@ class ArtisanController extends Controller
             ->path(base_path())
             ->run();
 
+        $output = htmlentities($process->output());
+        $output = preg_replace("/\e\[[0-9;]*m/", '', $output);
+
         return response()->json([
-            'output' => htmlentities($process->output())
+            'output' => $output,
         ]);
     }
 }
